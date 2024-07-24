@@ -29,6 +29,23 @@ mongoose.connect(MONGODB);
 //database variable calling the sync of mongoose via mongodb
 const db = mongoose.connection;
 
+const saltRounds = parseInt(process.env.salt, 10);
+
+const Schema = mongoose.Schema;
+
+const userSchema = new Schema({
+  userName: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  passWord: {
+    type: String,
+    required: true,
+  },
+});
+const User = mongoose.model("User", userSchema);
+
 //initalization of local browser #
 const PORT = process.env.PORT || 5000;
 
